@@ -8,13 +8,6 @@
 import SwiftUI
 import Foundation
 
-struct Question: Identifiable {
-    let id = UUID()
-    let text: String
-    let answers: [String]
-    let correct: String
-}
-
 struct QuestionView: View {
     @State private var currentQuestionIndex = 0
     @State private var selectedAnswer: String? = nil

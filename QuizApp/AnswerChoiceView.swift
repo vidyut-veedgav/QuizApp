@@ -8,15 +8,27 @@
 import SwiftUI
 
 struct AnswerChoiceView: View {
-    @Binding var questions: Question
+    @Binding var question: Question
+    var answers = [String]()
     var columns = [GridItem(.flexible()), GridItem(.flexible())]
+    @State var correct = false
     var body: some View {
         LazyVGrid(columns: columns) {
-            ForEach()
+            ForEach(answers, id: \.self) { answer in
+                Button(answer) {
+                    if (question.validateAnswer(selection: answer, correct: question.correct)) {
+                        withAnimation {
+                            correct.toggle()
+                        } completion: {
+                            correct.toggle()
+                        }
+                    }
+                }
+            }
         }
     }
 }
 
 #Preview {
-    AnswerChoiceView()
+    AnswerChoiceView(question: .constant(Question(text: "", answers: [], correct: "")))
 }
