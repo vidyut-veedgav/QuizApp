@@ -14,9 +14,11 @@ struct QuestionView: View {
     @State private var incorrectCount = 0
     @State private var showScore = false
     
-    @State private var questions = [Question(text: "In SwiftUI, which type of stack is used for layering views on top of each other?",
-        answers: ["ZStack", "VStack", "LStack", "HStack"],
-        correct: "ZStack")]
+    @Binding var question: Question
+    
+//    Question(text: "In SwiftUI, which type of stack is used for layering views on top of each other?",
+//        answers: ["ZStack", "VStack", "LStack", "HStack"],
+//        correct: "ZStack")
     
     var body: some View {
         VStack {
@@ -31,14 +33,17 @@ struct QuestionView: View {
                     .font(.largeTitle)
                     .bold()
                 
-                Text(questions[currentQuestionIndex].text)
-                                   .font(.headline)
-                                   .padding()
+                Text(question.text)
+                    .font(.headline)
+                    .padding()
             }
+            Spacer()
+            AnswerChoiceView(question: question)
+            Spacer()
         }
     }
 }
 
 #Preview {
-    QuestionView()
+    QuestionView(question: .constant(Question(text: "hello", answers: ["A", "B", "C", "D"], correct: "")))
 }

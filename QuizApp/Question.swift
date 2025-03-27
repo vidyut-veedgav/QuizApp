@@ -16,6 +16,14 @@ struct Question : Identifiable {
     func validateAnswer(selection: String, correct: String) -> Bool {
         return (selection == correct) ? true : false
     }
+    
+    func getQuestion() -> String {
+        return self.text
+    }
+    
+    func getAnswers() -> [String] {
+        return self.answers
+    }
 }
 
 

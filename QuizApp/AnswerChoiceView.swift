@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct AnswerChoiceView: View {
-    @Binding var question: Question
-    var answers = [String]()
+    @State var question: Question
     var columns = [GridItem(.flexible()), GridItem(.flexible())]
     @State var correct = false
     var body: some View {
+        let answers = question.getAnswers()
         LazyVGrid(columns: columns) {
             ForEach(answers, id: \.self) { answer in
                 Button(answer) {
@@ -24,11 +24,15 @@ struct AnswerChoiceView: View {
                         }
                     }
                 }
+                .padding()
+                .foregroundStyle(.white)
+                .background(Color(.green))
+                .clipShape(Capsule())
             }
         }
     }
 }
 
 #Preview {
-    AnswerChoiceView(question: .constant(Question(text: "", answers: [], correct: "")))
+    AnswerChoiceView(question: Question(text: "hello", answers: ["A", "B", "C", "D"], correct: ""))
 }
