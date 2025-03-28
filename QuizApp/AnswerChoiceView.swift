@@ -8,9 +8,13 @@
 import SwiftUI
 
 struct AnswerChoiceView: View {
-    @State var question: Question
-    var columns = [GridItem(.flexible()), GridItem(.flexible())]
-    @State var correct = false
+    
+    @Binding var question: Question // The current question
+    @Binding var selectedAnswer: String? // The answer choice selected by the user
+    @State var correct = false // Whether the user was correct or not
+    
+    var columns = [GridItem(.flexible()), GridItem(.flexible())] // Building the grid
+    
     var body: some View {
         let answers = question.getAnswers()
         LazyVGrid(columns: columns) {
@@ -34,5 +38,5 @@ struct AnswerChoiceView: View {
 }
 
 #Preview {
-    AnswerChoiceView(question: Question(text: "hello", answers: ["A", "B", "C", "D"], correct: ""))
+    AnswerChoiceView(question: .constant(Question(text: "hello", answers: ["A", "B", "C", "D"], correct: "A")), selectedAnswer: .constant(""))
 }
